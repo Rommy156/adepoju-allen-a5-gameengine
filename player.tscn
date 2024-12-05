@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://belqtckt0g1f7"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_e651c"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="2_ihuat"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2x8gs"]
+radius = 22.3607
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_e651c")
+accel = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_2x8gs")
+debug_color = Color(2.16588e-06, 0.480195, 0.561904, 0.42)
+
+[node name="Ellipse" type="Node2D" parent="."]
+script = ExtResource("2_ihuat")
+fill_color = Color(0.447343, 0.00241636, 0.776369, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpumlel7appfp"]
+
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="1_2v212"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u3who"]
+radius = 45.8912
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u3who")
+
+[node name="Ellipse" type="Node2D" parent="."]
+script = ExtResource("1_2v212")
+fill_color = Color(0.835718, 3.22476e-06, 7.70092e-07, 1)
