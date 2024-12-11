@@ -1,15 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://belqtckt0g1f7"]
+[gd_scene load_steps=9 format=3 uid="uid://belqtckt0g1f7"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_e651c"]
+[ext_resource type="PackedScene" uid="uid://b7rrcwno8hvvp" path="res://bullet.tscn" id="2_7ud20"]
 [ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="2_ihuat"]
+[ext_resource type="Texture2D" uid="uid://cfsxib2gfkg8t" path="res://addons/LPCAnimatedSprite/icon2d.png" id="3_4xwfh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2x8gs"]
-radius = 22.3607
+radius = 25.0
+
+[sub_resource type="Animation" id="Animation_d7sow"]
+resource_name = "player"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qaeil"]
+length = 0.0333367
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oomx5"]
+_data = {
+"RESET": SubResource("Animation_qaeil"),
+"player": SubResource("Animation_d7sow")
+}
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_e651c")
+bulletPrefab = ExtResource("2_7ud20")
 accel = 500.0
+metadata/_edit_horizontal_guides_ = [-68.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)
@@ -21,3 +61,20 @@ script = ExtResource("2_ihuat")
 fill_color = Color(0.447343, 0.00241636, 0.776369, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1, 1.09652)
+drag_horizontal_enabled = true
+drag_left_margin = 0.35
+drag_top_margin = 0.35
+drag_right_margin = 0.35
+drag_bottom_margin = 0.35
+editor_draw_drag_margin = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(-1.885, 2)
+texture = ExtResource("3_4xwfh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_oomx5")
+}

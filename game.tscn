@@ -1,8 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkxu817236p1i"]
+[gd_scene load_steps=11 format=3 uid="uid://dkxu817236p1i"]
 
+[ext_resource type="Script" path="res://Game.cs" id="1_q2y0m"]
 [ext_resource type="PackedScene" uid="uid://belqtckt0g1f7" path="res://player.tscn" id="1_qi6f8"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="2_4rxps"]
+[ext_resource type="Script" path="res://SpawnLocation.cs" id="2_dhbcj"]
 [ext_resource type="PackedScene" uid="uid://dpumlel7appfp" path="res://enemy.tscn" id="2_reuqp"]
-[ext_resource type="PackedScene" uid="uid://b7rrcwno8hvvp" path="res://bullet.tscn" id="3_fr612"]
+[ext_resource type="Texture2D" uid="uid://bq5f7s5i2me74" path="res://background.png" id="3_n78nd"]
+[ext_resource type="Script" path="res://EnemyTimer.cs" id="4_yf0y7"]
+
+[sub_resource type="Curve2D" id="Curve2D_besro"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -637, -452, 0, 0, 0, 0, 994.287, -446.042, 0, 0, 0, 0, 1283, -449, 0, 0, 0, 0, 1277, 478, 0, 0, 0, 0, -644, 483, 0, 0, 0, 0, -642, -454)
+}
+point_count = 6
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t36u0"]
 size = Vector2(57, 1204)
@@ -10,41 +20,88 @@ size = Vector2(57, 1204)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_osrg0"]
 size = Vector2(21.7579, 2253)
 
-[node name="Node" type="Node"]
+[node name="main" type="Node" node_paths=PackedStringArray("spawn")]
+script = ExtResource("1_q2y0m")
+enemyPrefab = ExtResource("2_reuqp")
+spawn = NodePath("game/spawn location")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(390, -19.5001)
+scale = Vector2(2.42006, 1.51019)
+texture = ExtResource("3_n78nd")
 
 [node name="game" type="Node2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="game"]
+[node name="spawn location" type="Path2D" parent="game" node_paths=PackedStringArray("Enemy")]
+curve = SubResource("Curve2D_besro")
+script = ExtResource("2_dhbcj")
+Enemy = NodePath("../../enemy")
+
+[node name="Rectangle" type="Node2D" parent="game/spawn location"]
+position = Vector2(1281.98, -290.662)
+rotation = 1.57727
+script = ExtResource("2_4rxps")
+
+[node name="walls" type="Node2D" parent="game"]
+
+[node name="right wall" type="StaticBody2D" parent="game/walls"]
 position = Vector2(788, 138)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="game/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="game/walls/right wall"]
 position = Vector2(631.5, -158)
 shape = SubResource("RectangleShape2D_t36u0")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="game"]
+[node name="Rectangle" type="Node2D" parent="game/walls/right wall"]
+position = Vector2(631.951, -159)
+script = ExtResource("2_4rxps")
+size = Vector2(71.1005, 1192)
+
+[node name="left wall" type="StaticBody2D" parent="game/walls"]
 position = Vector2(788, 138)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="game/StaticBody2D3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="game/walls/left wall"]
 position = Vector2(-1524, -164)
 shape = SubResource("RectangleShape2D_t36u0")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="game"]
+[node name="Rectangle" type="Node2D" parent="game/walls/left wall"]
+position = Vector2(-1523.59, -153.737)
+script = ExtResource("2_4rxps")
+size = Vector2(58.681, 1236.53)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="game/StaticBody2D2"]
+[node name="top wall" type="StaticBody2D" parent="game/walls"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="game/walls/top wall"]
 position = Vector2(336, -618)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_osrg0")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="game/StaticBody2D2"]
+[node name="Rectangle" type="Node2D" parent="game/walls/top wall"]
+position = Vector2(345.046, -640.015)
+script = ExtResource("2_4rxps")
+size = Vector2(2232.09, 68.0787)
+
+[node name="bottom wall" type="StaticBody2D" parent="game/walls"]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="game/walls/bottom wall"]
 position = Vector2(341, 591)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_osrg0")
 
+[node name="Rectangle" type="Node2D" parent="game/walls/bottom wall"]
+position = Vector2(346.916, 604.643)
+script = ExtResource("2_4rxps")
+size = Vector2(2235.98, 48.3735)
+corner_radius = 0.0
+
+[node name="enemy timer" type="Timer" parent="game"]
+autostart = true
+script = ExtResource("4_yf0y7")
+
 [node name="Player" parent="." instance=ExtResource("1_qi6f8")]
 position = Vector2(381, 59)
 
-[node name="bullet" parent="." instance=ExtResource("3_fr612")]
-position = Vector2(290, 168)
-scale = Vector2(-3.3045, 2.75907)
-
 [node name="enemy" parent="." instance=ExtResource("2_reuqp")]
+
+[connection signal="timeout" from="game/enemy timer" to="." method="_on_enemy_timer_timeout"]

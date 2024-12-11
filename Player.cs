@@ -3,6 +3,8 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
+	[Export]
+	PackedScene bulletPrefab;
     [Export] public float speed = 200.0f;
     [Export] public float accel = 200.0f;
 
@@ -24,5 +26,20 @@ public partial class Player : CharacterBody2D
 		}
 
 		MoveAndSlide();
+		LookAt(GetGlobalMousePosition());
+
+		if (Input.IsActionJustPressed("shoot")) Shoot(); 
+
+	}
+    private void Shoot()
+    {
+		GD.Print("Bullet Fired");
+		Node2D bulletInstance = bulletPrefab.Instantiate<Node2D>();
+		bulletInstance.GlobalPosition = GlobalPosition;
+        bulletInstance.Rotation = Rotation;
+
+        AddChild(bulletInstance);
+
+		
 	}
 }

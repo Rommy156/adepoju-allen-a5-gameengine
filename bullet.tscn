@@ -1,9 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7rrcwno8hvvp"]
+[gd_scene load_steps=4 format=3 uid="uid://b7rrcwno8hvvp"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_yn6na"]
-b = Vector2(0, 15)
+[ext_resource type="Script" path="res://Bullet.cs" id="1_uhii2"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="2_b2b3m"]
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_tsmom"]
+b = Vector2(14, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_yn6na")
+[node name="Node2D" type="Node2D"]
+position = Vector2(0, 2)
+script = ExtResource("1_uhii2")
+speed = 5.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Rectangle" type="Node2D" parent="Area2D"]
+position = Vector2(7.00839, -0.0194321)
+script = ExtResource("2_b2b3m")
+size = Vector2(13.9466, 2.9308)
+corner_radius = 0.0
+fill_color = Color(0.000451485, 0, 2.10484e-05, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_tsmom")
+debug_color = Color(0, 0.509804, 0.713726, 1)
