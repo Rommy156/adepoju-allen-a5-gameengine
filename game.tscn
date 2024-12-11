@@ -28,8 +28,8 @@ spawn = NodePath("game/spawn location")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(390, -19.5001)
-scale = Vector2(2.42006, 1.51019)
+position = Vector2(466, -55.4999)
+scale = Vector2(3.07852, 1.78426)
 texture = ExtResource("3_n78nd")
 
 [node name="game" type="Node2D" parent="."]

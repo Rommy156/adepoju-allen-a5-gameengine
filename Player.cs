@@ -27,17 +27,19 @@ public partial class Player : CharacterBody2D
 
 		MoveAndSlide();
 		LookAt(GetGlobalMousePosition());
-
+		//shoot if left mouse button is clicked
 		if (Input.IsActionJustPressed("shoot")) Shoot(); 
 
 	}
     private void Shoot()
-    {
+    {	//display message on console after evry click
 		GD.Print("Bullet Fired");
+		//instatiate node in scene
 		Node2D bulletInstance = bulletPrefab.Instantiate<Node2D>();
+		//shoot bullet where mouse cursor is placed
 		bulletInstance.GlobalPosition = GlobalPosition;
         bulletInstance.Rotation = Rotation;
-
+		//add child node
         AddChild(bulletInstance);
 
 		
