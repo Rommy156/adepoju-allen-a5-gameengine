@@ -16,7 +16,7 @@ speed = 5.0
 [node name="Rectangle" type="Node2D" parent="Area2D"]
 position = Vector2(7.00839, -0.0194321)
 script = ExtResource("2_b2b3m")
-size = Vector2(13.9466, 2.9308)
+size = Vector2(20, 20)
 corner_radius = 0.0
 fill_color = Color(0.000451485, 0, 2.10484e-05, 1)
 

@@ -20,7 +20,9 @@ public partial class SpawnLocation : Path2D
     public override void _Input(InputEvent @event)
     {
         if (Input.IsActionJustPressed("shoot")) 
-		{PackedScene enemy = EnemyPrefab.Instantiate<PackedScene>();
+		{
+			PackedScene enemy = EnemyPrefab.Instantiate<PackedScene>();
+			AddChild(Enemy);
         }
     }
 }

@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpumlel7appfp"]
+[gd_scene load_steps=4 format=3 uid="uid://dpumlel7appfp"]
 
+[ext_resource type="Script" path="res://Enemy.cs" id="1_2m71b"]
 [ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="1_2v212"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u3who"]
@@ -7,6 +8,7 @@ radius = 45.8912
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 motion_mode = 1
+script = ExtResource("1_2m71b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u3who")
