@@ -9,7 +9,6 @@ b = Vector2(14, 0)
 [node name="Node2D" type="Node2D"]
 position = Vector2(0, 2)
 script = ExtResource("1_uhii2")
-speed = 5.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
